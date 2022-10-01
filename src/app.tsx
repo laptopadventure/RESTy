@@ -6,37 +6,49 @@ import './app.scss';
 // There's pros and cons for each way of doing this ...
 import Header from './components/header';
 import Footer from './components/footer';
-import Form from './components/form';
+import Form, {FormResult} from './components/form';
 import Results from './components/results';
 
-class App extends React.Component {
+export type MockData = {
+  count: number,
+  results: FormResult[],
+}
 
-  constructor(props) {
+export type callApi = (requestParams: FormResult) => void;
+
+class App extends React.Component {
+  state: {
+    data?: MockData,
+    requestParams?: FormResult,
+  }
+
+  constructor(props: {}) {
     super(props);
     this.state = {
-      data: null,
-      requestParams: {},
+      data: undefined,
+      requestParams: undefined,
     };
   }
 
-  callApi = (requestParams) => {
+  callApi = (requestParams: FormResult): void => {
     // mock output
-    const data = {
+    const data: MockData = {
       count: 2,
       results: [
-        {name: 'fake thing 1', url: 'http://fakethings.com/1'},
-        {name: 'fake thing 2', url: 'http://fakethings.com/2'},
+        {name: 'fake thing 1', method:'GET', url: 'http://fakethings.com/1'},
+        {name: 'fake thing 2', method:'GET', url: 'http://fakethings.com/2'},
       ],
     };
     this.setState({data, requestParams});
   }
 
   render() {
+    const { requestParams } = this.state
     return (
       <React.Fragment>
         <Header />
-        <div>Request Method: {this.state.requestParams.method}</div>
-        <div>URL: {this.state.requestParams.url}</div>
+        <div>Request Method: {!!requestParams && requestParams.method}</div>
+        <div>URL: {!!requestParams && requestParams.url}</div>
         <Form handleApiCall={this.callApi} />
         <Results data={this.state.data} />
         <Footer />

@@ -1,12 +1,20 @@
 import React from 'react';
 
 import './form.scss';
+import { callApi } from '../../app';
 
-function Form({handleApiCall}) {
+export type FormResult = {
+  name: string,
+  method: string,
+  url: string,
+}
 
-  const handleSubmit = e => {
+export default function Form({handleApiCall}: {handleApiCall: callApi}) {
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = {
+    const formData: FormResult = {
+      name: "pokemon call",
       method:'GET',
       url: 'https://pokeapi.co/api/v2/pokemon',
     };
@@ -29,5 +37,4 @@ function Form({handleApiCall}) {
     </form>
   );
 }
-
-export default Form;
+ 
