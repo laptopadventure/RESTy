@@ -1,7 +1,7 @@
 import React from 'react';
 
-import './form.scss';
-import { callApi } from '../../app';
+import './Form.scss';
+import { callApi } from '../../App';
 
 export type FormResult = {
   name: string,

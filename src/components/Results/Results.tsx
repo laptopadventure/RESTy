@@ -1,6 +1,6 @@
-import './results.scss';
+import './Results.scss';
 
-import { MockData } from '../../app';
+import { MockData } from '../../App';
 
 type ResultsProps = {
   data?: MockData
