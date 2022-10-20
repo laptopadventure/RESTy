@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 
-import App from './App';
+import App from './app';
 
 function Main() {
   return <App />;
